@@ -1,5 +1,76 @@
-<h1>New Company</h1>
+<% provide(:title, 'Sign up') %>
+<section class="page-section signup-section">
 
-<%= render 'form' %>
+	<h1 class="section-title font-alt mb-70 mb-sm-40">REGISTER COMPANY</h1>
+	<div class="col-md-4 col-md-offset-4">
+		<% flash.each do |message_type, message| %>
+	        <div class="alert alert-<%= message_type %>"><%= message %></div>
+	    <% end %>
+		<%= form_for(@company, :html => {:class => 'form contact-form', :id => 'signup_form'}) do |f| %>
+			<% if @company.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-<%= link_to 'Back', companies_path %>
+		      <ul>
+		      <% @company.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+		<!-- <form class="form contact-form" id="contact_form"> -->
+		    <div class="clearfix">   
+
+		    		<!-- Name -->
+		            <div class="form-group">
+		                <%= f.text_field :name , :class => "input-md round form-control",:placeholder =>"Name", :required => true %>
+		            </div> 
+
+		            <!-- Email -->
+		            <div class="form-group">
+		                <%= f.text_field :email , :class => "input-md round form-control",:placeholder =>"Email", :type => "email", :required => true %>
+		            </div> 
+
+		            <!-- Phone -->
+		            <div class="form-group">
+		                <%= f.text_field :phone , :class => "input-md round form-control",:placeholder =>"Phone", :type => "tel", :pattern=>".{5,100}",:required => true %>
+		            </div>
+
+                    <div class="form-group">
+                      <%= f.text_field :pan, :class => "input-md round form-control", :placeholder => "PAN Number", :required => ""  %>
+                    </div>
+		            
+		            <!-- Password -->
+		            <div class="form-group">                       
+		                
+		                <%= f.password_field :password , :class => "input-md round form-control",:placeholder =>"Password", :pattern=>".{5,100}",:required => true, :type => "password"%>
+		            </div>
+
+		            <!-- Password Confirmation -->
+		            <div class="form-group">                       
+		                
+		                <%= f.password_field :password_confirmation , :class => "input-md round form-control",:placeholder =>"Confirm Password", :pattern=>".{5,100}",:required => true, :type => "password"%>
+		            </div>
+
+		    </div>
+		    
+		    <div class="clearfix">
+
+		            <!-- Send Button -->
+		            <div class="align-right pt-10 form-group">
+		                <!-- <button class="submit_btn btn btn-mod btn-medium btn-round" id="submit_btn">Submit Message</button> -->
+		                <%= f.submit "Sign Up", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+		            </div>         
+		          
+		        
+		    </div>            
+		    
+		    
+		    <div id="result"></div>
+		<!-- </form> -->
+		<% end %>
+
+	</div>
+</section>
+
+	

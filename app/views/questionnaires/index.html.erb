@@ -1,24 +1,57 @@
-<p id="notice"><%= notice %></p>
+<div class="page" id="top">   
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " data-background=<%= asset_url("full-width-images/landing.jpg")%> style='background-image:url(<%= asset_url("full-width-images/landing.jpg")%>)' id="home">
+       <div class="container">            
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text" style="    padding: 100px 0px 45px 0px;">
+                    
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                       Questionnaire
+                    </h1>                    
+                                       
+                </div>
+            </div>
+            <!-- End Hero Content -->            
+       </div>
+    </section>
+    <!-- End Home Section -->
 
-<h1>Listing Questionnaires</h1>
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+        <div class="container relative">            
+         
+            <div class="row"> 
+              <p id="notice"><%= notice %></p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th colspan="2">Question</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @questionnaires.each do |questionnaire| %>
-      <tr>
-        <td><%= link_to 'Show', questionnaire %></td>
-        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
-        <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                <tbody>
+                  <% @questionnaires.each do |questionnaire| %>
+                    <tr>
+                      <td colspan="2"><%= questionnaire.question %></td>
+                      <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
+                      <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                      <% questionnaire.questionnaire_options.each do |questionnaire_option| %>
+                        <tr>
+                          <td><%= questionnaire_option.option %></td>
+                          <td><%= questionnaire_option.isRight %></td>
+                        </tr>
+                      <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>       
+        </div>
+    </section>
+    <!-- End Section -->
+</div>
 
 <br>
 

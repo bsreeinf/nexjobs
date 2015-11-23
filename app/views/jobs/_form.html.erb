@@ -1,3 +1,5 @@
+
+
 <%= form_for(@job) do |f| %>
   <% if @job.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +13,71 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+            <form class="form contact-form" id="contact_form">
+              <div class="clearfix">
+                <div class="row"> 
+                  <div class="col-sm-4 mb-40">
+                    <div class="field">
+                      <%= f.text_field :company_id, :required => "", :hidden => "", :value => session[:company_id]%>
+                    </div>
+                    <div class="field" style="margin-bottom: 10px;">
+                      <%= f.text_field :title, :class => "input-md round form-control", :placeholder => "Title", :pattern => ".{1,100}", :required => ""  %>
+                    </div>
+                    <div class="row">
+                      <div class="field col-sm-6" style="margin-bottom: 10px;">
+                        <%= f.select(:location_id, Location.all.collect{ |s| [s.description, s.id] }, {:prompt => "Select City"}, 
+                        {:class => "input-md form-control", :required => ""}) %>
+                      </div>
+                      <div class="field col-sm-6" style="margin-bottom: 10px;">
+                        <%= f.text_field :postal_code, :class => "input-md round form-control", :placeholder => "Postal Code", :pattern => ".{6,100}", :required => ""  %>
+                      </div>
+                    </div>
+                    <div class="field" style="margin-bottom: 10px;">
+                        <%= f.select(:industry_id, Industry.all.collect{ |s| [s.description, s.id] }, {:prompt => "Select Industry"}, 
+                        {:class => "input-md form-control", :required => ""}) %>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 mb-40">
+                    <div class="row">
+                      <div class="field col-sm-6" style="margin-bottom: 10px;">
+                        <% @salary_types = { "w" => "Weekly", "m" => "Monthly", "f" => "Fortnightly"} %>
+                        <%= f.select(:salary_type, @salary_types.collect{ |k,v| [v, k] }, {:prompt => "Salary Type"}, 
+                        {:class => "input-md form-control", :required => ""}) %>
+                      </div>
+                      <div class="field col-sm-6" style="margin-bottom: 10px;">
+                        <%= f.text_field :salary_offered, :class => "input-md round form-control", :placeholder => "Salary Offered", :type => "number", :min => "0", :max => "500000", :required => ""  %>
+                      </div>
+                    </div>
+                    <div class="field" style="margin-bottom: 10px;">
+                      <%= f.text_area :job_description, :class => "input-md round form-control", :placeholder => "Job Description", :pattern => ".{1,300}", :required => "", :style => "resize: none; height: 122px;"  %>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 mb-40">
+                    <div class="field" style="margin-bottom: 10px;">
+                      <%= f.text_field :contact_person_name, :class => "input-md round form-control", :placeholder => "Contact Person Name", :pattern => ".{3,100}", :required => ""  %>
+                    </div>
+                    <div class="field" style="margin-bottom: 10px;">
+                      <%= f.text_field :contact_person_phone, :class => "input-md round form-control", :placeholder => "Contact Person Phone", :type => "tel", :required => ""  %>
+                    </div>
+                    <div class="field" style="margin-bottom: 10px;">
+                      <%= f.text_field :contact_person_email, :class => "input-md round form-control", :placeholder => "Contact Person Email", :type => "email", :required => ""  %>
+                    </div>
+                    <div class="field">
+                      <%= f.check_box :is_online, :hidden => "", :placeholder => "Is Online?", :required => "", :value => "1"  %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+              <div class="clearfix">
+                <!-- Send Button -->
+                <div class="align-right pt-10">
+                    <%= submit_tag "SUBMIT", :class => "submit_btn btn btn-mod btn-medium btn-round", :id => "login-btn" %>
+                </div>
+              </div>
+            </form>   
+            <!-- End Login Form -->
+          
 <% end %>

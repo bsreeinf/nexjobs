@@ -5,6 +5,8 @@ class CreateCompanies < ActiveRecord::Migration
 		t.string :phone
 		t.string :email
 		t.string :pan
+		t.string :address
+		t.boolean :is_verified
 
     	t.string :password_digest
 		t.string :activation_digest

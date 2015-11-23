@@ -1,4 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="page" id="top">   
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " data-background=<%= asset_url("full-width-images/landing.jpg")%> style='background-image:url(<%= asset_url("full-width-images/landing.jpg")%>)' id="home">
+       <div class="relative container align-left">
+	      <div class="row">
+	          <div style="margin:90px 0 60px 0;">
+	              <h1 class="hs-line-11 font-alt mb-20 mb-xs-0"><%= @user.name %></h1>
+	              <div class="hs-line-4 font-alt"><%= @user.email %></div>
+	              <div class="hs-line-4 font-alt"><%= @user.phone %></div>
+	          </div>
+	      </div>
+	  </div>
+    </section>
+    <!-- End Home Section -->
+
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+    	<p id="notice"><%= notice %></p>
+        <div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Highest education: <%= @edu_str %></h5>
+		    </div>
+		</div>
+		<div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Skills: <%= @skills_str %></h5>
+		    </div>
+		</div>
+		<div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Languages: <%= @languages_str %></h5>
+		    </div>
+		</div>
+    </section>
+    <!-- End Section -->
+</div>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

@@ -3,7 +3,7 @@ class CreateQuestionnaires < ActiveRecord::Migration
     create_table :questionnaires do |t|
     	t.references :job
 
-    	t.string :quesetion
+    	t.string :question
 
       t.timestamps null: false
     end

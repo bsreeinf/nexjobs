@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>Nexjobs</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta charset="utf-8">
+  <meta name="author" content="bsreeinf">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>  
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
+  <!-- Favicons -->
+  <link rel="shortcut icon" href=<%= image_path("favicon.png") %>>
+  <link rel="apple-touch-icon" href=<%= image_path("apple-touch-icon.png") %>>
+  <link rel="apple-touch-icon" sizes="72x72" href=<%= image_path("apple-touch-icon-72x72.png") %>>
+  <link rel="apple-touch-icon" sizes="114x114" href=<%= image_path("apple-touch-icon-114x114.png") %>>
 
-<%= yield %>
+</head>
+
+<body class="appear-animate">
+	
+  <%= render 'layouts/header'%>
+  <%= yield %>
+  <%= debug(params) if Rails.env.development? %>
+  <%= render 'layouts/footer' %>
 
 </body>
+
 </html>

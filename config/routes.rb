@@ -1,8 +1,26 @@
 Rails.application.routes.draw do
-  resources :questionnaires
-  resources :jobs
-  resources :companies
+  
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  root 'landing_page#index'
+
+  get    'login'                        => 'sessions#new'
+  get    'signup'                       => 'companies#new'
+  get    'login'                        => 'sessions#new'
+  post   'login'                        => 'sessions#create'
+  delete 'logout'                       => 'sessions#destroy'
+  get    'applications'                 => 'jobs#applications'
+
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+
   resources :users
+  resources :companies
+  resources :init
+  resources :jobs
+  resources :questionnaires
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

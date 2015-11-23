@@ -4,12 +4,20 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires
   # GET /questionnaires.json
   def index
-    @questionnaires = Questionnaire.all
+    @questionnaires = Questionnaire.where(:job_id => params[:job_id])
+    respond_to do |format|
+      format.html
+      format.json {render json: @questionnaires}
+    end
   end
 
   # GET /questionnaires/1
   # GET /questionnaires/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json {render json: @questionnaire}
+    end
   end
 
   # GET /questionnaires/new
