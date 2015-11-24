@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'landing_page#index'
 
   get    'login'                        => 'sessions#new'
+  get    'login_device'                 => 'sessions#mobile_login'
   get    'signup'                       => 'companies#new'
   get    'login'                        => 'sessions#new'
   post   'login'                        => 'sessions#create'

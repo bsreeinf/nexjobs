@@ -9,14 +9,7 @@ class SessionsController < ApplicationController
       # if company.activated?  
         log_in company
         params[:session][:remember_me] == '1' ? remember(company) : forget(company)
-        # redirect_back_or company
         redirect_to jobs_url
-      # else
-      #   message  = "Account not activated. "
-      #   message += "Check your email for the activation link."
-      #   flash[:warning] = message
-      #   redirect_to root_url
-      # end
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
@@ -27,5 +20,24 @@ class SessionsController < ApplicationController
   def destroy
   	log_out if logged_in?
     redirect_to root_url
+  end
+
+  def mobile_login
+    @data = JSON.parse('{"status": "unknown"}')
+
+    user = User.find_by(email: params[:email])
+
+    if user && user.authenticate(params[:password])
+      @data['status'] = 'success'
+      @data['user_details'] = JSON.parse(user.to_json)
+      @data['skills'] = JSON.parse(user.user_skills.to_json)
+      @data['languages'] = JSON.parse(user.user_languages.to_json)
+    else
+      @data['status'] = 'failed'
+    end
+    respond_to do |format|
+      format.html
+      format.json {render json: @data}
+    end
   end
 end

@@ -172,16 +172,6 @@ ActiveRecord::Schema.define(version: 20151124192520) do
   add_index "user_languages", ["language_id"], name: "index_user_languages_on_language_id"
   add_index "user_languages", ["user_id"], name: "index_user_languages_on_user_id"
 
-  create_table "user_qualifications", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "qualification_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "user_qualifications", ["qualification_id"], name: "index_user_qualifications_on_qualification_id"
-  add_index "user_qualifications", ["user_id"], name: "index_user_qualifications_on_user_id"
-
   create_table "user_skills", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -193,6 +183,7 @@ ActiveRecord::Schema.define(version: 20151124192520) do
   add_index "user_skills", ["user_id"], name: "index_user_skills_on_user_id"
 
   create_table "users", force: :cascade do |t|
+    t.integer  "qualification_id"
     t.string   "name"
     t.string   "email"
     t.string   "phone"
