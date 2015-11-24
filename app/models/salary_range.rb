@@ -1,2 +1,2 @@
-class SalaryRange < ActiveRecord::Base
+class SalaryRange < ActiveRecord::Base	
 end

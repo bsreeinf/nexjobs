@@ -45,6 +45,11 @@ Industry.create!(description: "Service")
 Industry.create!(description: "Hospitality")
 Industry.create!(description: "Mining")
 
+JobStatus.create!(description: "Applied")
+JobStatus.create!(description: "Saved")
+JobStatus.create!(description: "Accepted")
+JobStatus.create!(description: "Rejected")
+
 num_companies = 20
 num_companies.times do |n|
 	Company.create!(

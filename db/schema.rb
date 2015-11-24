@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123153138) do
+ActiveRecord::Schema.define(version: 20151124192520) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -64,6 +64,12 @@ ActiveRecord::Schema.define(version: 20151123153138) do
   end
 
   create_table "industries", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "job_statuses", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -141,12 +147,13 @@ ActiveRecord::Schema.define(version: 20151123153138) do
   create_table "saved_applied_jobs", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "job_id"
-    t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "job_status_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "saved_applied_jobs", ["job_id"], name: "index_saved_applied_jobs_on_job_id"
+  add_index "saved_applied_jobs", ["job_status_id"], name: "index_saved_applied_jobs_on_job_status_id"
   add_index "saved_applied_jobs", ["user_id"], name: "index_saved_applied_jobs_on_user_id"
 
   create_table "skills", force: :cascade do |t|
