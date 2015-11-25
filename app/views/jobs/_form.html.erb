@@ -64,8 +64,11 @@
                     <div class="field" style="margin-bottom: 10px;">
                       <%= f.text_field :contact_person_email, :class => "input-md round form-control", :placeholder => "Contact Person Email", :type => "email", :required => ""  %>
                     </div>
-                    <div class="field">
-                      <%= f.check_box :is_online, :hidden => "", :placeholder => "Is Online?", :required => "", :value => "1"  %>
+                    <div class="field hidden">
+                      <%= f.label :terms_of_service do %>
+                        <%= f.check_box :is_online, :placeholder => "Is Online?", :value => "1"  %>
+                        Post job
+                      <% end %>
                     </div>
                   </div>
                 </div>

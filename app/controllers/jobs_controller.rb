@@ -49,8 +49,13 @@ class JobsController < ApplicationController
         # render text: @min_max
     end
     if(!params.has_key?(:filter_company) && !params.has_key?(:filter_location) && !params.has_key?(:filter_industry) && !params.has_key?(:filter_salary))
-        @jobs = Job.where(:company_id => current_company.id).paginate(page: params[:page],:per_page => 10)
+        if(params.has_key?(:mobile))
+          @jobs = Job.all
+        else
+          @jobs = Job.where(:company_id => current_company.id).paginate(page: params[:page],:per_page => 10)
+        end
     end
+
     
     
     @salary_types = { "w" => "Weekly", "m" => "Monthly", "f" => "Fortnightly"}

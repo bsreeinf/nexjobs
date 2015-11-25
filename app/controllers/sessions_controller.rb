@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       @data['status'] = 'success'
       @data['user_details'] = JSON.parse(user.to_json)
-      @data['skills'] = JSON.parse(user.user_skills.to_json)
-      @data['languages'] = JSON.parse(user.user_languages.to_json)
+      @data['user_details']['skills'] = JSON.parse(user.user_skills.to_json)
+      @data['user_details']['languages'] = JSON.parse(user.user_languages.to_json)
     else
       @data['status'] = 'failed'
     end
