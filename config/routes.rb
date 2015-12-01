@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'landing_page/index'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root 'landing_page#index'
@@ -11,6 +13,9 @@ Rails.application.routes.draw do
   post   'login'                        => 'sessions#create'
   delete 'logout'                       => 'sessions#destroy'
   get    'applications'                 => 'jobs#applications'
+
+  get    'saved_applied_jobs'           => 'jobs#saved_applied_jobs'
+  post   'save_apply_job'                    => 'jobs#save_apply_job'
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

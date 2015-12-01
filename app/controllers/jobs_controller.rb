@@ -79,6 +79,50 @@ class JobsController < ApplicationController
     @salary_types = { "w" => "Weekly", "m" => "Monthly", "f" => "Fortnightly"}
   end
 
+  def saved_applied_jobs
+    respond_to do |format|
+      format.json {render json: SavedAppliedJob.where(:user_id => params[:user_id])}  
+    end
+  end
+
+  def save_apply_job
+    @existing_save = SavedAppliedJob.where(user_id: params[:user_id]).where(job_id: params[:job_id])
+    if @existing_save.empty?
+      @hasPassedQuestionnaire = true
+      @score = 0
+      if(params.has_key?(:questionnaire_answers))
+        @arr = params[:questionnaire_answers].split("||||")
+        @arr.each{ |e|
+          if(QuestionnaireOption.find(e).isRight == true)
+            @score = @score + 1
+          end
+        }
+        # if(@score < @arr.length)
+        if(@score < 3)
+          @hasPassedQuestionnaire = false
+          QuestionnaireResult.create(user_id: params[:user_id], job_id: params[:job_id], score: @score, passed: false)
+        end
+      end
+      if(@hasPassedQuestionnaire == true)
+        params.delete :questionnaire_answers
+        @saved_applied_job = SavedAppliedJob.new(save_apply_params)
+        QuestionnaireResult.create(user_id: params[:user_id], job_id: params[:job_id], score: @score, passed: true)
+        if @saved_applied_job.save
+          render json: @saved_applied_job
+        else
+          render json: @saved_applied_job.errors, status: :unprocessable_entity
+        end
+      else
+        # render json: @saved_applied_job.errors, status: :unprocessable_entity
+        @status = JSON.parse('{"response_status":"failed"}')
+        render json: @status
+      end
+    else
+      @status = JSON.parse('{"response_status":"exists"}')
+      render json: @status
+    end
+  end
+
   # GET /jobs/new
   def new
     @job = Job.new
@@ -141,5 +185,9 @@ class JobsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:company_id, :title,:location_id,:postal_code,:industry_id,:salary_type,:salary_offered,:job_description,:contact_person_name,:contact_person_phone,:contact_person_email,:is_online)
+    end
+
+    def save_apply_params
+      params.require(:saved_applied_job).permit(:user_id, :job_id, :job_status_id)
     end
 end

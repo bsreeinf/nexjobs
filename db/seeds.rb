@@ -1,21 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create!(name: 'Emanuel', city: cities.first)
-
-User.create!({
-	name: "John",
-	email: "john@example.com",
-	phone: "+91 1234567890",
-	password: "qwertyui",
-	password_confirmation: "qwertyui"#,
-	# activated:    true,
-	# activated_at: Time.zone.now
-})
-
 10.times do |n|
 	Qualification.create!(description: FFaker::Education.degree_short)
 end
@@ -50,6 +32,23 @@ JobStatus.create!(description: "Saved")
 JobStatus.create!(description: "Accepted")
 JobStatus.create!(description: "Rejected")
 
+User.create!(
+	name: "John",
+	email: "john@example.com",
+	phone: "+91 1234567890",
+	password: "qwertyui",
+	password_confirmation: "qwertyui"#,
+	# activated:    true,
+	# activated_at: Time.zone.now
+)
+UserSkill.create!(	user_id: 1,	skill_id: 2	)
+UserSkill.create!(	user_id: 1,	skill_id: 4	)
+UserSkill.create!(	user_id: 1,	skill_id: 6	)
+
+UserLanguage.create!(	user_id: 1,	language_id: 4	)
+UserLanguage.create!(	user_id: 1,	language_id: 6	)
+UserLanguage.create!(	user_id: 1,	language_id: 9	)
+
 num_companies = 20
 num_companies.times do |n|
 	Company.create!(
@@ -82,6 +81,11 @@ end
 		is_online: true
 	)
 end
+
+SavedAppliedJob.create(	user_id: 1,	job_id: 1, job_status_id: 1	)
+SavedAppliedJob.create(	user_id: 1,	job_id: 3, job_status_id: 1	)
+SavedAppliedJob.create(	user_id: 1,	job_id: 5, job_status_id: 2	)
+SavedAppliedJob.create(	user_id: 1,	job_id: 9, job_status_id: 2	)
 
 
 Questionnaire.create!(job_id: 1, question: "What is 2 + 2?")
