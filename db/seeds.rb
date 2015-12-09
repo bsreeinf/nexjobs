@@ -33,8 +33,9 @@ JobStatus.create!(description: "Accepted")
 JobStatus.create!(description: "Rejected")
 
 User.create!(
+	qualification_id: 3
 	name: "John",
-	email: "john@example.com",
+	email: "john@example.com", 
 	phone: "+91 1234567890",
 	password: "qwertyui",
 	password_confirmation: "qwertyui"#,
@@ -137,6 +138,8 @@ QuestionnaireOption.create!(questionnaire_id: 8, option: "3.1428", isRight: fals
 QuestionnaireOption.create!(questionnaire_id: 8, option: "3.1415", isRight: false)
 QuestionnaireOption.create!(questionnaire_id: 8, option: "Ratio of circumference to diameter of a circle.", isRight: true)
 QuestionnaireOption.create!(questionnaire_id: 8, option: "6.12123", isRight: false)
+
+
 
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
