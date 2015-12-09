@@ -33,7 +33,7 @@ JobStatus.create!(description: "Accepted")
 JobStatus.create!(description: "Rejected")
 
 User.create!(
-	qualification_id: 3
+	qualification_id: 3,
 	name: "John",
 	email: "john@example.com", 
 	phone: "+91 1234567890",
