@@ -66,6 +66,23 @@ num_companies.times do |n|
 	)
 end
 
+2.times do |n|
+	Job.create!(
+		company_id: 1,
+		industry_id: rand(1..5),
+		location_id: rand(1..10),
+		title: FFaker::Job.title,
+		postal_code: FFaker::String.from_regexp(/\d\d\d\d\d\d/),
+		salary_type: FFaker::String.from_regexp(/[wmf]/),
+		salary_offered: 5000,
+		job_description: FFaker::Lorem.sentence,
+		contact_person_name: FFaker::Name.name,
+		contact_person_phone: FFaker::PhoneNumber.short_phone_number,
+		contact_person_email: FFaker::Internet.safe_email,
+		is_online: true
+	)
+end
+
 40.times do |n|
 	Job.create!(
 		company_id: rand(1..num_companies),

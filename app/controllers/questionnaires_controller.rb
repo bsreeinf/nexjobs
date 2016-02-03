@@ -5,6 +5,7 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires.json
   def index
     @questionnaires = Questionnaire.where(:job_id => params[:job_id])
+    @job_id = params[:job_id]
     respond_to do |format|
       format.html
       format.json {render json: @questionnaires}
@@ -36,7 +37,7 @@ class QuestionnairesController < ApplicationController
 
     respond_to do |format|
       if @questionnaire.save
-        format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully created.' }
+        format.html { redirect_to "/questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully created.' }
         format.json { render :show, status: :created, location: @questionnaire }
       else
         format.html { render :new }
@@ -50,7 +51,7 @@ class QuestionnairesController < ApplicationController
   def update
     respond_to do |format|
       if @questionnaire.update(questionnaire_params)
-        format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully updated.' }
+        format.html { render :edit, notice: 'Questionnaire was successfully updated.' }
         format.json { render :show, status: :ok, location: @questionnaire }
       else
         format.html { render :edit }
@@ -64,7 +65,7 @@ class QuestionnairesController < ApplicationController
   def destroy
     @questionnaire.destroy
     respond_to do |format|
-      format.html { redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.' }
+      format.html { redirect_to "/questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -77,6 +78,6 @@ class QuestionnairesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def questionnaire_params
-      params[:questionnaire]
+      params[:questionnaire].permit(:job_id, :question)
     end
 end

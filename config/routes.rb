@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :init
   resources :jobs
   resources :questionnaires
+  resources :questionnaire_options
 
 
   # The priority is based upon order of creation: first created -> highest priority.
