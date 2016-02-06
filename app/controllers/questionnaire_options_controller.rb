@@ -36,7 +36,7 @@ class QuestionnaireOptionsController < ApplicationController
 
     respond_to do |format|
       if @questionnaire_option.save
-        format.html { redirect_to @questionnaire_option, notice: 'QuestionnaireOption was successfully created.' }
+        format.html { redirect_to "/questionnaires/#{@questionnaire_option.questionnaire_id}/edit", notice: 'QuestionnaireOption was successfully created.' }
         format.json { render :show, status: :created, location: @questionnaire_option }
       else
         format.html { render :new }
