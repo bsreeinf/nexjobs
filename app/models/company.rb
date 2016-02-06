@@ -1,7 +1,8 @@
 class Company < ActiveRecord::Base
  	has_secure_password
  	attr_accessor :remember_token, :activation_token, :reset_token
-
+ 	has_attached_file :logo
+	validates_attachment_content_type :logo, :content_type => /\Aimage\/.*\Z/
  	#validations
 	validates :name,  presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\-.]+\.[a-z]+\z/i
@@ -11,6 +12,7 @@ class Company < ActiveRecord::Base
 
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+	
 	
 	has_many :jobs
 

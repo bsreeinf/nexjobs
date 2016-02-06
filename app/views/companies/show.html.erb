@@ -3,10 +3,14 @@
     <section class="home-section bg-dark-alfa-50 " data-background=<%= asset_url("full-width-images/landing.jpg")%> style='background-image:url(<%= asset_url("full-width-images/landing.jpg")%>)' id="home">
        <div class="relative container align-left">
 	      <div class="row">
-	          <div style="margin:90px 0 60px 0;">
-	              <h1 class="hs-line-11 font-alt mb-20 mb-xs-0"><%= @company.name %></h1>
-	              <div class="hs-line-4 font-alt"><%= @company.email %></div>
-	          </div>
+
+			<div style="margin:90px 0 60px 0;">
+				<%if !@company.logo.url.nil?%>
+					<img style="max-width: 130px;" src="<%=@company.logo.url%>" alt="LOGO">	
+				<%end%>
+			  <h1 class="hs-line-11 font-alt mb-20 mb-xs-0"><%= @company.name %></h1>
+			  <div class="hs-line-4 font-alt"><%= @company.email %></div>
+			</div>
 	      </div>
 	  </div>
     </section>

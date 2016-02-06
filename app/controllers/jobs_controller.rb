@@ -8,21 +8,21 @@ class JobsController < ApplicationController
   def index
     if(params.has_key?(:filter_company))
         @arr = params[:filter_company].split(",")
-        @jobs = Job.where(:company_id => @arr).order("created_at DESC")
+        @jobs = Job.where(:company_id => @arr).order("id DESC")
     end
     if(params.has_key?(:filter_industry))
         @arr = params[:filter_industry].split(",")
         if(@jobs == nil)
             @jobs = Job
         end
-        @jobs = @jobs.where(:industry => @arr).order("created_at DESC")
+        @jobs = @jobs.where(:industry => @arr).order("id DESC")
     end
     if(params.has_key?(:filter_location))
         @arr = params[:filter_location].split(",")
         if(@jobs == nil)
             @jobs = Job
         end
-        @jobs = @jobs.where(:location_city => @arr).order("created_at DESC")
+        @jobs = @jobs.where(:location_city => @arr).order("id DESC")
     end
     if(params.has_key?(:filter_salary))
         @arr = params[:filter_salary].split(",")
@@ -34,7 +34,7 @@ class JobsController < ApplicationController
         @arr.each{ |e|
           @min_amount = SalaryRange.find(e).min_amount
           @max_amount = SalaryRange.find(e).max_amount
-          @filtered = @jobs.where(:salary_offered => @min_amount.first .. @max_amount.last).order("created_at DESC")
+          @filtered = @jobs.where(:salary_offered => @min_amount.first .. @max_amount.last).order("id DESC")
           if(!@filtered.blank?)
             if(@res == nil)
               @res = @filtered
@@ -50,9 +50,9 @@ class JobsController < ApplicationController
     end
     if(!params.has_key?(:filter_company) && !params.has_key?(:filter_location) && !params.has_key?(:filter_industry) && !params.has_key?(:filter_salary))
         if(params.has_key?(:mobile))
-          @jobs = Job.all.order("created_at DESC")
+          @jobs = Job.all.order("id DESC")
         else
-          @jobs = Job.where(:company_id => current_company.id).paginate(page: params[:page],:per_page => 10).order("created_at DESC")
+          @jobs = Job.where(:company_id => current_company.id).paginate(page: params[:page],:per_page => 10).order("id DESC")
         end
     end
 

@@ -6,6 +6,7 @@ class CreateCompanies < ActiveRecord::Migration
 		t.string :email
 		t.string :pan
 		t.string :address
+		t.has_attached_file :logo
 		t.boolean :is_verified
 
     	t.string :password_digest

@@ -3,7 +3,7 @@ ActiveAdmin.register Company do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :name, :email, :phone, :pan, :address, :password, :password_confirmation
+permit_params :name, :email, :phone, :pan, :address, :password, :password_confirmation, :logo
 #
 # or
 #
@@ -21,6 +21,7 @@ permit_params :name, :email, :phone, :pan, :address, :password, :password_confir
 			f.input :phone
 			f.input :address
 			f.input :pan
+			f.input :logo
 	    end
 	    f.actions
   	end
