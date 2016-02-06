@@ -3,7 +3,7 @@ ActiveAdmin.register Job do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-# permit_params :list, :of, :attributes, :on, :model
+permit_params :company_id, :title,:location_id,:postal_code,:industry_id,:salary_type,:salary_offered,:job_description,:contact_person_name,:contact_person_phone,:contact_person_email,:is_online
 #
 # or
 #

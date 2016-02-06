@@ -1,4 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="page" id="top">   
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " data-background=<%= asset_url("full-width-images/landing.jpg")%> style='background-image:url(<%= asset_url("full-width-images/landing.jpg")%>)' id="home">
+       <div class="relative container align-left">
+	      <div class="row">
+	          <div style="margin:90px 0 60px 0;">
+	              <h1 class="hs-line-11 font-alt mb-20 mb-xs-0"><%= @company.name %></h1>
+	              <div class="hs-line-4 font-alt"><%= @company.email %></div>
+	          </div>
+	      </div>
+	  </div>
+    </section>
+    <!-- End Home Section -->
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+    	<% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>
+        <div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Phone: <%= @company.phone %></h5>
+		    </div>
+		</div>
+		<div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Address: <%= @company.address %></h5>
+		    </div>
+		</div>
+		<div class="relative container align-left">
+		    <div class="row">
+		      <h5 class="uppercase mb-30">Pan: <%= @company.pan %></h5>
+		    </div>
+		</div>
+    </section>
+    <!-- End Section -->
+</div>
+
+<%= link_to 'Edit', edit_company_path(@company) %>
