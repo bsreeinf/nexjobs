@@ -57,7 +57,7 @@
                                 <td><%= job.title %></td>
                                 <td><%= job.job_description %></td>
                                 <td><%= @salary_types[job.salary_type] %></td>
-                                <td>&#x20b9; <%= job.salary_offered %></td>
+                                <td><i class="fa fa-rupee"></i> <%= job.salary_offered %></td>
                                 <td><%= local_time(job.created_at, '%b %e, %Y %l:%M%P') %></td>
                                 <td><a href="<%= questionnaires_path(:job_id => job.id) %>">edit</a>
                                 
