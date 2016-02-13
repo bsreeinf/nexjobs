@@ -20,9 +20,11 @@ class InitController < ApplicationController
         @data['salary_range_list']  = JSON.parse(SalaryRange.all.select(:id, :min_amount, :max_amount).to_json)
         @data['industry_list']      = JSON.parse(Industry.all.select(:id, :description).to_json)
 
-        @arr = JSON.parse(Company.all.select(:id, :name, :phone, :email, :address).to_json)
+        @arr = JSON.parse(Company.all.select(:id, :name, :phone, :email, :address).order(:id).to_json)
         @arr.each{ |e|
-          e[:logo] = Company.find(id: e.id).logo.url
+          tmp_company = Company.find(e["id"])
+          e[:logo] = ""
+          e[:logo] = tmp_company.logo.url if tmp_company.logo.file?
         }
         @data['company_list']       = (@arr)
 
