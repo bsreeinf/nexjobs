@@ -42,9 +42,10 @@
                               <tr>
                                 <th>Applicant Name</th>
                                 <th>Title</th>
-                                <th>Description</th>
+                                <!-- <th>Description</th>
                                 <th>Salary Type</th>
-                                <th>Salary</th>
+                                <th>Salary</th> -->
+                                <th>Score</th>
                                 <th>Applied On</th>
                               </tr>
                             </thead>
@@ -53,9 +54,16 @@
                               <tr>
                                 <td><%= link_to job_application.user.name, user_path(job_application.user.id) %></td>
                                 <td><%= job_application.job.title %></td>
-                                <td><%= job_application.job.job_description %></td>
+                                <!-- <td><%= job_application.job.job_description %></td>
                                 <td><%= @salary_types[job_application.job.salary_type] %></td>
-                                <td>&#x20b9; <%= job_application.job.salary_offered %></td>
+                                <td>&#x20b9; <%= job_application.job.salary_offered %></td> -->
+                                <%result = QuestionnaireResult.where(user_id: job_application.user.id, job_id: job_application.job.id)%>
+                                <td><%=
+                                    if !result.nil? && !result.first.nil?
+                                        "#{result.first.score} of #{job_application.job.questionnaires.length}"
+                                    else
+                                        "N/A"
+                                    end%></td>
                                 <td><%= local_time(job_application.created_at, '%b %e, %Y %l:%M%P') %></td>
 
                               </tr>

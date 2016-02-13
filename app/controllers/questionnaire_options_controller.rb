@@ -36,7 +36,7 @@ class QuestionnaireOptionsController < ApplicationController
 
     respond_to do |format|
       if @questionnaire_option.save
-        format.html { redirect_to "/questionnaires/#{@questionnaire_option.questionnaire_id}/edit", notice: 'QuestionnaireOption was successfully created.' }
+        format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire_option.questionnaire.job_id}", notice: 'Option was successfully created.' }
         format.json { render :show, status: :created, location: @questionnaire_option }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class QuestionnaireOptionsController < ApplicationController
   def update
     respond_to do |format|
       if @questionnaire_option.update(questionnaire_option_params)
-        format.html { redirect_to "/questionnaires/#{@questionnaire_option.questionnaire_id}/edit", notice: 'QuestionnaireOption was successfully updated.' }
+        format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire_option.questionnaire.job_id}", notice: 'Option was successfully updated.' }
         format.json { render :show, status: :ok, location: @questionnaire_option }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class QuestionnaireOptionsController < ApplicationController
   def destroy
     @questionnaire_option.destroy
     respond_to do |format|
-      format.html { redirect_to "/questionnaires/#{@questionnaire_option.questionnaire_id}/edit", notice: 'QuestionnaireOption was successfully destroyed.' }
+      format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire_option.questionnaire.job_id}", notice: 'Option was successfully deleted.' }
       format.json { head :no_content }
     end
   end

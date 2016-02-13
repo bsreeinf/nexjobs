@@ -16,9 +16,15 @@ class InitController < ApplicationController
         @data['skills_list']        = JSON.parse(Skill.all.select(:id, :description).to_json)
         @data['language_list']      = JSON.parse(Language.all.select(:id, :description).to_json)
         @data['location_list']      = JSON.parse(Location.all.select(:id, :description).to_json)
+        @data['job_type_list']      = JSON.parse(JobType.all.select(:id, :description).to_json)
         @data['salary_range_list']  = JSON.parse(SalaryRange.all.select(:id, :min_amount, :max_amount).to_json)
         @data['industry_list']      = JSON.parse(Industry.all.select(:id, :description).to_json)
-        @data['company_list']       = JSON.parse(Company.all.select(:id, :name, :phone, :email, :address).to_json)
+
+        @arr = JSON.parse(Company.all.select(:id, :name, :phone, :email, :address).to_json)
+        @arr.each{ |e|
+          e[:logo] = Company.find(id: e.id).logo.url
+        }
+        @data['company_list']       = (@arr)
 
     end
 

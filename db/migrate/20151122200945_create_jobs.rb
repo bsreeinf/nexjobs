@@ -4,6 +4,7 @@ class CreateJobs < ActiveRecord::Migration
     	t.references :company
     	t.references :industry
     	t.references :location
+    	t.references :job_type
 
 		t.string :title
 		t.string :job_description

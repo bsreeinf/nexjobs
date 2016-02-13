@@ -32,6 +32,11 @@ JobStatus.create!(description: "Saved")
 JobStatus.create!(description: "Accepted")
 JobStatus.create!(description: "Rejected")
 
+JobType.create!(description: "Part time")
+JobType.create!(description: "Full time")
+JobType.create!(description: "Intern")
+JobType.create!(description: "Contract")
+
 User.create!(
 	qualification_id: 3,
 	name: "John",
@@ -50,7 +55,18 @@ UserLanguage.create!(	user_id: 1,	language_id: 4	)
 UserLanguage.create!(	user_id: 1,	language_id: 6	)
 UserLanguage.create!(	user_id: 1,	language_id: 9	)
 
-num_companies = 20
+Company.create!(
+  	name: FFaker::Company.name, 
+  	address: FFaker::Address.street_address,
+  	phone: FFaker::PhoneNumber.short_phone_number,
+	email: "exampleinc@example.com",
+    password: "qwertyui",
+	password_confirmation: "qwertyui",
+    pan: FFaker::String.from_regexp(/\w\w\w\d\d\d\d\d/),
+	is_verified: true
+)
+
+num_companies = 19
 num_companies.times do |n|
 	Company.create!(
 	  	name: FFaker::Company.name, 
@@ -60,9 +76,7 @@ num_companies.times do |n|
 	    password: "qwertyui",
   		password_confirmation: "qwertyui",
 	    pan: FFaker::String.from_regexp(/\w\w\w\d\d\d\d\d/),
-		is_verified: true #,
-		# activated:    true,
-		# activated_at: Time.zone.now
+		is_verified: true
 	)
 end
 

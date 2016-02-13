@@ -139,7 +139,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to jobs_url, notice: 'Job was successfully created.' }
+        format.html { redirect_to jobs_url, notice: 'Your job post has been submitted and is under review.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -167,7 +167,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
+      format.html { redirect_to jobs_url, notice: 'Job was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -184,7 +184,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:company_id, :title,:location_id,:postal_code,:industry_id,:salary_type,:salary_offered,:job_description,:contact_person_name,:contact_person_phone,:contact_person_email,:is_online)
+      params.require(:job).permit(:company_id, :title,:location_id,:job_type_id,:postal_code,:industry_id,:salary_type,:salary_offered,:job_description,:contact_person_name,:contact_person_phone,:contact_person_email,:is_online)
     end
 
     def save_apply_params

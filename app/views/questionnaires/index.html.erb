@@ -24,25 +24,11 @@
             <div class="row"> 
               <p id="notice"><%= notice %></p>
               <table class="table">
-                <!-- <thead>
-                  <tr>
-                    <th colspan="2">Question</th>
-                    <th colspan="3"></th>
-                  </tr>
-                </thead> -->
-
+                <div class="align-right pt-10 form-group" style="margin-bottom: 20px;">                            
+                  <%= link_to "Edit Questionnaire", "/edit_questionnaires?job_id=#{params[:job_id]}", :class => "submit_btn btn btn-mod btn-medium btn-round",:id =>"edit_questionnaire_page_link"%>
+                </div>         
                 <tbody>
-                  <tr>
-                    <%=form_for Questionnaire.new do |f|%>
-                        <th colspan="3">
-                            <%= f.text_field :job_id, :style => "display: none;", :value => params["job_id"] %>
-                            <%= f.text_field :question , :class => "input-md round form-control", :placeholder => "New Question" %>
-                        </th>
-                        <th>
-                            <%= f.submit "Save", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
-                        </th>
-                    <%end%>
-                  </tr>
+                  
                   <% @questionnaires.each do |questionnaire| %>
                     <table class="table">
                       <thead>

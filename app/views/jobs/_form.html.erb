@@ -29,6 +29,10 @@
                         {:class => "input-md form-control", :required => ""}) %>
                       </div>
                       <div class="field col-sm-6" style="margin-bottom: 10px;">
+                        <%= f.select(:job_type_id, JobType.all.collect{ |s| [s.description, s.id] }, {:prompt => "Select Job Type"},
+                        {:class => "input-md form-control", :required => ""}) %>
+                      </div>
+                      <div class="field col-sm-6" style="margin-bottom: 10px;">
                         <%= f.text_field :postal_code, :class => "input-md round form-control", :placeholder => "Postal Code", :pattern => ".{6,100}", :required => ""  %>
                       </div>
                     </div>

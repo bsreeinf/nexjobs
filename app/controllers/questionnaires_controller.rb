@@ -1,10 +1,9 @@
 class QuestionnairesController < ApplicationController
-  before_action :set_questionnaire, only: [:show, :edit, :update, :destroy]
 
   # GET /questionnaires
   # GET /questionnaires.json
   def index
-    @questionnaires = Questionnaire.where(:job_id => params[:job_id])
+    @questionnaires = Questionnaire.where(:job_id => params[:job_id]).order(:created_at)
     @job_id = params[:job_id]
     respond_to do |format|
       format.html
@@ -27,7 +26,9 @@ class QuestionnairesController < ApplicationController
   end
 
   # GET /questionnaires/1/edit
-  def edit
+  def edit_questionnaires
+    @questionnaires = Questionnaire.where(:job_id => params[:job_id]).order(:id)
+    @job_id = params[:job_id]
   end
 
   # POST /questionnaires
@@ -37,7 +38,7 @@ class QuestionnairesController < ApplicationController
 
     respond_to do |format|
       if @questionnaire.save
-        format.html { redirect_to "/questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully created.' }
+        format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully created.' }
         format.json { render :show, status: :created, location: @questionnaire }
       else
         format.html { render :new }
@@ -49,9 +50,10 @@ class QuestionnairesController < ApplicationController
   # PATCH/PUT /questionnaires/1
   # PATCH/PUT /questionnaires/1.json
   def update
+    @questionnaire = Questionnaire.find(params[:id])
     respond_to do |format|
       if @questionnaire.update(questionnaire_params)
-        format.html { render :edit, notice: 'Questionnaire was successfully updated.' }
+        format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully updated.' }
         format.json { render :show, status: :ok, location: @questionnaire }
       else
         format.html { render :edit }
@@ -63,21 +65,18 @@ class QuestionnairesController < ApplicationController
   # DELETE /questionnaires/1
   # DELETE /questionnaires/1.json
   def destroy
+    @questionnaire = Questionnaire.find(params[:id])
     @questionnaire.destroy
     respond_to do |format|
-      format.html { redirect_to "/questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully destroyed.' }
+      format.html { redirect_to "/edit_questionnaires?job_id=#{@questionnaire.job_id}", notice: 'Questionnaire was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_questionnaire
-      @questionnaire = Questionnaire.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def questionnaire_params
-      params[:questionnaire].permit(:job_id, :question)
+      params[:questionnaire].permit(:id, :job_id, :question)
     end
 end

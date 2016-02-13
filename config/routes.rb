@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :companies
   resources :init
   resources :jobs
+
+  get 'edit_questionnaires' => 'questionnaires#edit_questionnaires'
   resources :questionnaires
   resources :questionnaire_options
 

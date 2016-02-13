@@ -82,10 +82,17 @@ ActiveRecord::Schema.define(version: 20151124192520) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "job_types", force: :cascade do |t|
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "industry_id"
     t.integer  "location_id"
+    t.integer  "job_type_id"
     t.string   "title"
     t.string   "job_description"
     t.string   "postal_code"
